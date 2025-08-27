@@ -1,0 +1,38 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "ODS2STG Sales",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "ods sales": {
+      "queryId": "61aadea9-99a8-408f-b99c-de280d211517",
+      "queryName": "ods sales"
+    },
+    "ods sales_DataDestination": {
+      "queryId": "689786ef-2dc3-48f6-8f8a-17a02b49b282",
+      "queryName": "ods sales_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    },
+    "dwh customer_dim": {
+      "queryId": "e2b14b32-97a4-4305-b4f9-c135ad234274",
+      "queryName": "dwh customer_dim"
+    },
+    "dwh product_dim": {
+      "queryId": "271f1181-7960-4ed3-9a21-b2c4013cfd84",
+      "queryName": "dwh product_dim"
+    },
+    "dwh territory_dim": {
+      "queryId": "58cd70ae-25ec-4ab1-9fe3-c5ec4d4b941c",
+      "queryName": "dwh territory_dim"
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"06fb49ca-0294-453c-bef5-86c43c154a34\",\"DatasourceId\":\"02527277-3762-4ed5-bab9-dad944d5dd53\"}"
+    }
+  ]
+}

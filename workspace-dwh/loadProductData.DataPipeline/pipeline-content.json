@@ -39,8 +39,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
-                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -94,6 +94,8 @@
           "secureOutput": false
         },
         "name": "Copy data - product - ODS",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Script - delete records in ods",
@@ -121,7 +123,7 @@
         "name": "Dataflow - product - STG",
         "dependsOn": [
           {
-            "activity": "Copy data - product - ODS",
+            "activity": "Copy data - product_subcategogy - ODS",
             "dependencyConditions": [
               "Succeeded"
             ]
@@ -178,7 +180,7 @@
           "scripts": [
             {
               "text": {
-                "value": "truncate table ods.product;\r\ntruncate table stg.product;",
+                "value": "truncate table ods.product;\ntruncate table stg.product;\ntruncate table ods.product_category;\ntruncate table stg.product_category;\ntruncate table ods.product_subcategory\ntruncate table stg.product_subcategory;\n",
                 "type": "Expression"
               },
               "type": "Query"
@@ -206,12 +208,248 @@
           "secureOutput": false
         },
         "name": "Script - delete records in ods",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
+      },
+      {
+        "type": "Office365Outlook",
+        "typeProperties": {
+          "inputs": {
+            "body": {
+              "To": "mohamed.hamouchi@laco.be",
+              "Subject": "Loading STG data failed - product",
+              "Body": "<p>Dear,</p>\n<p>@{pipeline()?.TriggerEvent?.Source}@{pipeline()?.TriggerEvent?.Subject}@{pipeline().parameters.sample_date}</p>\n<p>A problem has been occured when loading ODS data in STG for the item product. please could you have a look.</p>\n<p>Thanks!</p>\n<p>Regards,</p>",
+              "Sensitivity": "",
+              "Importance": "Normal"
+            },
+            "method": "post",
+            "path": "/v2/Mail"
+          }
+        },
+        "name": "Office 365 Outlook1",
+        "dependsOn": [
+          {
+            "activity": "Dataflow - product - STG",
+            "dependencyConditions": [
+              "Failed"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": {
+                    "value": "@concat('Adventures_sample/AdventureWorks_',pipeline().parameters.sample_date)",
+                    "type": "Expression"
+                  },
+                  "fileName": {
+                    "value": "@concat('AdventureWorks_Product_Categories_',pipeline().parameters.sample_date,'.csv')",
+                    "type": "Expression"
+                  }
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaLakehouse2",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "disableMetricsCollection": false,
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "ods",
+                "table": "product_category"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaWarehouse2",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+                    "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data - product_categogy - ODS",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Copy data - product - ODS",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": {
+                    "value": "@concat('Adventures_sample/AdventureWorks_',pipeline().parameters.sample_date)",
+                    "type": "Expression"
+                  },
+                  "fileName": {
+                    "value": "@concat('AdventureWorks_Product_Subcategories_',pipeline().parameters.sample_date,'.csv')",
+                    "type": "Expression"
+                  }
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaLakehouse2",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "disableMetricsCollection": false,
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "ods",
+                "table": "product_subcategory"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaWarehouse2",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+                    "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data - product_subcategogy - ODS",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
+        "dependsOn": [
+          {
+            "activity": "Copy data - product_categogy - ODS",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ],
     "parameters": {
       "sample_date": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "20150201"
       }
     },
     "variables": {

@@ -9,8 +9,16 @@
       "queryId": "af4cd67e-1457-4a46-aaa5-549bb61178b0",
       "queryName": "stg product"
     },
+    "ods product_subcategory": {
+      "queryId": "99ba6696-c40b-40fd-a0e5-af02d5475c78",
+      "queryName": "ods product_subcategory"
+    },
+    "ods product_category": {
+      "queryId": "481c1843-8104-423b-8cb0-53c8ebbd3191",
+      "queryName": "ods product_category"
+    },
     "stg product_DataDestination": {
-      "queryId": "427413a2-e993-4cc1-895a-09bef58a456b",
+      "queryId": "12566e35-f560-42ee-b621-7cd3c3b90215",
       "queryName": "stg product_DataDestination",
       "isHidden": true,
       "loadEnabled": false

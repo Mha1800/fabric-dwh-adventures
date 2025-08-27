@@ -1,11 +1,11 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
-    "type": "DataPipeline",
-    "displayName": "tutoriel_1"
+    "type": "Dataflow",
+    "displayName": "ODS2STG Sales"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "206b5eeb-00eb-ac83-43da-ae68cab1ee2b"
+    "logicalId": "2c69ec8e-6115-b315-46b0-8ba4de6e2c74"
   }
 }

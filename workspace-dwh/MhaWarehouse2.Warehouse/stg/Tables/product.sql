@@ -10,5 +10,6 @@ CREATE TABLE [stg].[product] (
 	[ProductId] int NULL, 
 	[ProductPrice] decimal(18,0) NULL, 
 	[ProductCost] decimal(18,0) NULL, 
-	[ProductSubcategoryId] int NULL
+	[SubcategoryName] varchar(1) NULL, 
+	[CategoryName] varchar(1) NULL
 );

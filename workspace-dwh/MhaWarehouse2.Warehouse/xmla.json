@@ -601,13 +601,26 @@
             ]
           },
           {
-            "name": "ProductSubcategoryId",
-            "dataType": "int64",
-            "sourceColumn": "ProductSubcategoryId",
-            "formatString": "0",
-            "sourceProviderType": "int",
-            "sourceLineageTag": "ProductSubcategoryId",
-            "summarizeBy": "sum",
+            "name": "SubcategoryName",
+            "dataType": "string",
+            "sourceColumn": "SubcategoryName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "SubcategoryName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CategoryName",
+            "dataType": "string",
+            "sourceColumn": "CategoryName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "CategoryName",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2207,13 +2220,26 @@
             ]
           },
           {
-            "name": "ProductSubcategoryId",
-            "dataType": "int64",
-            "sourceColumn": "ProductSubcategoryId",
-            "formatString": "0",
-            "sourceProviderType": "int",
-            "sourceLineageTag": "ProductSubcategoryId",
-            "summarizeBy": "sum",
+            "name": "SubcategoryName",
+            "dataType": "string",
+            "sourceColumn": "SubcategoryName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "SubcategoryName",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "CategoryName",
+            "dataType": "string",
+            "sourceColumn": "CategoryName",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "CategoryName",
+            "summarizeBy": "none",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2368,66 +2394,11 @@
         "columns": [
           {
             "name": "OrderDate",
-            "dataType": "string",
+            "dataType": "dateTime",
             "sourceColumn": "OrderDate",
-            "sourceProviderType": "varchar",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
             "sourceLineageTag": "OrderDate",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "StockDate",
-            "dataType": "string",
-            "sourceColumn": "StockDate",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "StockDate",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "OrderNumber",
-            "dataType": "string",
-            "sourceColumn": "OrderNumber",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "OrderNumber",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "OrderLineItem",
-            "dataType": "string",
-            "sourceColumn": "OrderLineItem",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "OrderLineItem",
-            "summarizeBy": "none",
-            "annotations": [
-              {
-                "name": "SummarizationSetBy",
-                "value": "Automatic"
-              }
-            ]
-          },
-          {
-            "name": "OrderQuantity",
-            "dataType": "string",
-            "sourceColumn": "OrderQuantity",
-            "sourceProviderType": "varchar",
-            "sourceLineageTag": "OrderQuantity",
             "summarizeBy": "none",
             "annotations": [
               {
@@ -2473,6 +2444,65 @@
             "formatString": "0",
             "sourceProviderType": "int",
             "sourceLineageTag": "TerritoryId",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "StockDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StockDate",
+            "formatString": "General Date",
+            "sourceProviderType": "date",
+            "sourceLineageTag": "StockDate",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "OrderNumber",
+            "dataType": "string",
+            "sourceColumn": "OrderNumber",
+            "sourceProviderType": "varchar",
+            "sourceLineageTag": "OrderNumber",
+            "summarizeBy": "none",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "OrderLineItem",
+            "dataType": "int64",
+            "sourceColumn": "OrderLineItem",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "OrderLineItem",
+            "summarizeBy": "sum",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ]
+          },
+          {
+            "name": "OrderQuantity",
+            "dataType": "int64",
+            "sourceColumn": "OrderQuantity",
+            "formatString": "0",
+            "sourceProviderType": "decimal",
+            "sourceLineageTag": "OrderQuantity",
             "summarizeBy": "sum",
             "annotations": [
               {

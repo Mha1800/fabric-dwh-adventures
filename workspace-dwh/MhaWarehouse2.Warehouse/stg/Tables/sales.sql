@@ -1,11 +1,11 @@
 CREATE TABLE [stg].[sales] (
 
-	[OrderDate] varchar(8000) NULL, 
-	[StockDate] varchar(8000) NULL, 
-	[OrderNumber] varchar(8000) NULL, 
-	[OrderLineItem] varchar(8000) NULL, 
-	[OrderQuantity] varchar(8000) NULL, 
+	[OrderDate] date NULL, 
 	[ProductId] int NULL, 
 	[CustomerId] int NULL, 
-	[TerritoryId] int NULL
+	[TerritoryId] int NULL, 
+	[StockDate] date NULL, 
+	[OrderNumber] varchar(1) NULL, 
+	[OrderLineItem] decimal(18,0) NULL, 
+	[OrderQuantity] decimal(18,0) NULL
 );
