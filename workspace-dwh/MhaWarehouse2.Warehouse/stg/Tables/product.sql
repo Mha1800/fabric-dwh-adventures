@@ -1,0 +1,14 @@
+CREATE TABLE [stg].[product] (
+
+	[ProductSKU] varchar(8000) NULL, 
+	[ProductName] varchar(8000) NULL, 
+	[ModelName] varchar(8000) NULL, 
+	[ProductDescription] varchar(8000) NULL, 
+	[ProductColor] varchar(8000) NULL, 
+	[ProductSize] varchar(8000) NULL, 
+	[ProductStyle] varchar(8000) NULL, 
+	[ProductId] int NULL, 
+	[ProductPrice] decimal(18,0) NULL, 
+	[ProductCost] decimal(18,0) NULL, 
+	[ProductSubcategoryId] int NULL
+);

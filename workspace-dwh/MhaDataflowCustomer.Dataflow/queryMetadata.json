@@ -1,0 +1,26 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "MhaDataflowCustomer",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "ods customer": {
+      "queryId": "00ff9723-2e14-4ff4-9780-4701e7ef4cb3",
+      "queryName": "ods customer"
+    },
+    "ods customer_DataDestination": {
+      "queryId": "c9671af9-617e-4f7d-9326-66e4bcb12121",
+      "queryName": "ods customer_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"06fb49ca-0294-453c-bef5-86c43c154a34\",\"DatasourceId\":\"02527277-3762-4ed5-bab9-dad944d5dd53\"}"
+    }
+  ]
+}

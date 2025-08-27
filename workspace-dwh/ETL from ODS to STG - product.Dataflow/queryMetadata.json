@@ -1,0 +1,26 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "ETL from ODS to STG - product",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "stg product": {
+      "queryId": "af4cd67e-1457-4a46-aaa5-549bb61178b0",
+      "queryName": "stg product"
+    },
+    "stg product_DataDestination": {
+      "queryId": "427413a2-e993-4cc1-895a-09bef58a456b",
+      "queryName": "stg product_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"06fb49ca-0294-453c-bef5-86c43c154a34\",\"DatasourceId\":\"02527277-3762-4ed5-bab9-dad944d5dd53\"}"
+    }
+  ]
+}

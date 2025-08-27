@@ -1,0 +1,223 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": {
+                    "value": "@concat('Adventures_sample/AdventureWorks_',pipeline().parameters.sample_date)",
+                    "type": "Expression"
+                  },
+                  "fileName": {
+                    "value": "@concat('AdventureWorks_Products_',pipeline().parameters.sample_date,'.csv')",
+                    "type": "Expression"
+                  }
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaLakehouse2",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "disableMetricsCollection": false,
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "ods",
+                "table": "product"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaWarehouse2",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+                    "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data - product - ODS",
+        "dependsOn": [
+          {
+            "activity": "Script - delete records in ods",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "058b13d9-cfbe-ad35-47a8-c381310b4117",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Dataflow - product - STG",
+        "dependsOn": [
+          {
+            "activity": "Copy data - product - ODS",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "bce8b163-1cc1-97e6-4129-812801422db5",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "param_table_dim": {
+              "value": "product",
+              "type": "string"
+            },
+            "param_surogate_key": {
+              "value": "product_rk",
+              "type": "string"
+            },
+            "param_business_key": {
+              "value": "ProductId",
+              "type": "string"
+            },
+            "param_sample_date": {
+              "value": {
+                "value": "@pipeline().parameters.sample_date",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "SCD2 - product_dim",
+        "dependsOn": [
+          {
+            "activity": "Dataflow - product - STG",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Script",
+        "typeProperties": {
+          "scripts": [
+            {
+              "text": {
+                "value": "truncate table ods.product;\r\ntruncate table stg.product;",
+                "type": "Expression"
+              },
+              "type": "Query"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        },
+        "linkedService": {
+          "name": "MhaWarehouse2",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+              "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Script - delete records in ods",
+        "dependsOn": []
+      }
+    ],
+    "parameters": {
+      "sample_date": {
+        "type": "string"
+      }
+    },
+    "variables": {
+      "sample_date": {
+        "type": "String"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Dataflow",
+    "displayName": "ETL from ODS to STG - product"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "058b13d9-cfbe-ad35-47a8-c381310b4117"
+  }
+}

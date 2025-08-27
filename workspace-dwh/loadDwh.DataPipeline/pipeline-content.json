@@ -1,0 +1,83 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "SetVariable",
+        "typeProperties": {
+          "variableName": "sample_date",
+          "value": {
+            "value": "20150201",
+            "type": "Expression"
+          }
+        },
+        "policy": {
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Set variable - sample_date",
+        "dependsOn": []
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "26ff6bc7-6d1a-98de-41e1-b8b6af699dd0",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "sample_date": {
+              "value": "@variables('sample_date')",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline - Customer",
+        "dependsOn": [
+          {
+            "activity": "Set variable - sample_date",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "e8a187f6-1362-b24d-4ca2-48e175a81e7f",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "sample_date": {
+              "value": "@variables('sample_date')",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline - Product",
+        "dependsOn": [
+          {
+            "activity": "Invoke pipeline - Customer",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "variables": {
+      "sample_date": {
+        "type": "String"
+      }
+    }
+  }
+}
