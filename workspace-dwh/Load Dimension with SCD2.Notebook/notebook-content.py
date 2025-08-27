@@ -24,6 +24,17 @@
 # META   "language_group": "synapse_pyspark"
 # META }
 
+# CELL ********************
+
+from datetime import datetime
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
 # MARKDOWN ********************
 
 # ## Set parameters
@@ -40,7 +51,7 @@
 param_table_dim="customer"
 param_surogate_key="customer_rk"
 param_business_key="CustomerId"
-param_sample_date='2025-02-01 00:00:00'
+param_sample_date='20250201'
 
 
 # METADATA ********************
@@ -100,7 +111,18 @@ scd=SCDHandler(with_version=False,surogate_key=param_surogate_key,business_key=p
 
 # CELL ********************
 
-result=scd.scd_2(source_df,target_df,param_sample_date)
+sample_date_formated=datetime.strptime(param_sample_date, "%Y%m%d").date().strftime("%Y-%m-%d")+" 00:00:00"
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+result=scd.scd_2(source_df,target_df,sample_date_formated)
 
 # METADATA ********************
 

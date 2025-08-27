@@ -1,0 +1,26 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "ODS2STG - Territory",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "ods territory": {
+      "queryId": "534f9b7f-59d8-42f6-98d0-f87b29d9c142",
+      "queryName": "ods territory"
+    },
+    "ods territory_DataDestination": {
+      "queryId": "4b18fb03-ccc5-47a8-914f-746ab5d614d7",
+      "queryName": "ods territory_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"06fb49ca-0294-453c-bef5-86c43c154a34\",\"DatasourceId\":\"02527277-3762-4ed5-bab9-dad944d5dd53\"}"
+    }
+  ]
+}

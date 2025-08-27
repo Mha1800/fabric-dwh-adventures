@@ -9,10 +9,9 @@ shared #"stg product" = let
   #"Renamed columns" = Table.RenameColumns(#"Navigation 2", {{"ProductKey", "ProductId"}, {"ProductSubcategoryKey", "ProductSubcategoryId"}}),
   #"Changed column type" = Table.TransformColumnTypes(#"Renamed columns", {{"ProductCost", type number}, {"ProductPrice", type number}, {"ProductSubcategoryId", Int64.Type}, {"ProductId", Int64.Type}}),
   #"Merged queries" = Table.NestedJoin(#"Changed column type", {"ProductSubcategoryId"}, #"ods product_subcategory", {"ProductSubcategoryKey"}, "ods product_subcategory", JoinKind.LeftOuter),
-  #"Expanded ods product_subcategory" = Table.ExpandTableColumn(#"Merged queries", "ods product_subcategory", {"SubcategoryName", "CategoryName"}, {"SubcategoryName", "CategoryName"}),
-  #"Removed columns" = Table.RemoveColumns(#"Expanded ods product_subcategory", {"ProductSubcategoryId"})
+  #"Expanded ods product_subcategory" = Table.ExpandTableColumn(#"Merged queries", "ods product_subcategory", {"SubcategoryName", "CategoryName"}, {"SubcategoryName", "CategoryName"})
 in
-  #"Removed columns";
+  #"Expanded ods product_subcategory";
 shared #"ods product_subcategory" = let
   Source = Fabric.Warehouse(null),
   Navigation = Source{[workspaceId = "6db8acd3-f954-465c-b74e-6c155204510c"]}[Data],

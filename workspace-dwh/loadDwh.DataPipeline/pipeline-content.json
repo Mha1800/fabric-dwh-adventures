@@ -2,22 +2,6 @@
   "properties": {
     "activities": [
       {
-        "type": "SetVariable",
-        "typeProperties": {
-          "variableName": "sample_date",
-          "value": {
-            "value": "20150201",
-            "type": "Expression"
-          }
-        },
-        "policy": {
-          "secureInput": false,
-          "secureOutput": false
-        },
-        "name": "Set variable - sample_date",
-        "dependsOn": []
-      },
-      {
         "type": "ExecutePipeline",
         "typeProperties": {
           "pipeline": {
@@ -26,7 +10,7 @@
           },
           "parameters": {
             "sample_date": {
-              "value": "@variables('sample_date')",
+              "value": "@pipeline().parameters.sample_date",
               "type": "Expression"
             }
           },
@@ -36,14 +20,7 @@
           "secureInput": false
         },
         "name": "Invoke pipeline - Customer",
-        "dependsOn": [
-          {
-            "activity": "Set variable - sample_date",
-            "dependencyConditions": [
-              "Succeeded"
-            ]
-          }
-        ]
+        "dependsOn": []
       },
       {
         "type": "ExecutePipeline",
@@ -54,7 +31,7 @@
           },
           "parameters": {
             "sample_date": {
-              "value": "@variables('sample_date')",
+              "value": "@pipeline().parameters.sample_date",
               "type": "Expression"
             }
           },
@@ -72,8 +49,70 @@
             ]
           }
         ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "3322a3a3-58e3-ab24-4c05-b26921d6bac7",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "sample_date": {
+              "value": "@pipeline().parameters.sample_date",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline - Territory",
+        "dependsOn": [
+          {
+            "activity": "Invoke pipeline - Product",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "ExecutePipeline",
+        "typeProperties": {
+          "pipeline": {
+            "referenceName": "3fe478f6-e4ea-bb6d-4d87-43649e7985c3",
+            "type": "PipelineReference"
+          },
+          "parameters": {
+            "sample_date": {
+              "value": "@pipeline().parameters.sample_date",
+              "type": "Expression"
+            }
+          },
+          "waitOnCompletion": true
+        },
+        "policy": {
+          "secureInput": false
+        },
+        "name": "Invoke pipeline - Sales",
+        "dependsOn": [
+          {
+            "activity": "Invoke pipeline - Territory",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
       }
     ],
+    "parameters": {
+      "sample_date": {
+        "type": "string",
+        "defaultValue": "20150201"
+      }
+    },
     "variables": {
       "sample_date": {
         "type": "String"

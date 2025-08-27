@@ -1,6 +1,9 @@
 CREATE TABLE [stg].[sales] (
 
 	[OrderDate] date NULL, 
+	[product_rk] int NULL, 
+	[customer_rk] int NULL, 
+	[territory_rk] int NULL, 
 	[ProductId] int NULL, 
 	[CustomerId] int NULL, 
 	[TerritoryId] int NULL, 

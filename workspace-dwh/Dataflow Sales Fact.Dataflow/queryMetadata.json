@@ -1,0 +1,24 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {},
+  "name": "Dataflow Sales Fact",
+  "queryGroups": [],
+  "documentLocale": "en-GB",
+  "queriesMetadata": {
+    "stg sales": {
+      "queryId": "68226bbc-6dac-4ca9-917c-099c48383dfc",
+      "queryName": "stg sales"
+    },
+    "dwh sales": {
+      "queryId": "3344b6b6-4fce-44d3-8df3-1a66dce8d41b",
+      "queryName": "dwh sales"
+    }
+  },
+  "connections": [
+    {
+      "path": "Warehouse",
+      "kind": "Warehouse",
+      "connectionId": "{\"ClusterId\":\"06fb49ca-0294-453c-bef5-86c43c154a34\",\"DatasourceId\":\"02527277-3762-4ed5-bab9-dad944d5dd53\"}"
+    }
+  ]
+}

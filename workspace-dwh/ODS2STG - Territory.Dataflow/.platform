@@ -2,10 +2,10 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
   "metadata": {
     "type": "Dataflow",
-    "displayName": "ODS2STG - customer"
+    "displayName": "ODS2STG - Territory"
   },
   "config": {
     "version": "2.0",
-    "logicalId": "7c6aee53-2a93-905a-412d-89efd844dc61"
+    "logicalId": "618cee07-65df-968f-4728-b6be045f8e1d"
   }
 }

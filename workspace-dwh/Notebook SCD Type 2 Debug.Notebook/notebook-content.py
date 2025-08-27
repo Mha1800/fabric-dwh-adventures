@@ -62,9 +62,10 @@ from pyspark.sql.functions import *
 # CELL ********************
 
 
-source_df = spark.read.format("delta").load("abfss://MhaWorkspace2@onelake.dfs.fabric.microsoft.com/MhaWarehouse2.warehouse/Tables/ods/customer")
-source_df = source_df.withColumnRenamed("CustomerKey", "CustomerId")
-source_df = source_df.withColumn("CustomerId", source_df["CustomerId"].cast('integer'))
+source_df = spark.read.format("delta").load("abfss://MhaWorkspace2@onelake.dfs.fabric.microsoft.com/MhaWarehouse2.warehouse/Tables/ods/territory")
+source_df = source_df.withColumnRenamed("SalesTerritoryKey", "TerritoryId")
+source_df = source_df.withColumn("TerritoryId", source_df["TerritoryId"].cast('integer'))
+display(source_df)
 
 # METADATA ********************
 
@@ -75,7 +76,8 @@ source_df = source_df.withColumn("CustomerId", source_df["CustomerId"].cast('int
 
 # CELL ********************
 
-target_df = spark.read.format("delta").load("abfss://MhaWorkspace2@onelake.dfs.fabric.microsoft.com/MhaWarehouse2.warehouse/Tables/dwh/customer")
+target_df = spark.read.format("delta").load("abfss://MhaWorkspace2@onelake.dfs.fabric.microsoft.com/MhaWarehouse2.warehouse/Tables/dwh/territory_dim")
+display(target_df)
 
 # METADATA ********************
 
@@ -163,10 +165,7 @@ with_version = True
 
 # CELL ********************
 
-scd=SCDHandler()
-metadata_cols=['valid_from_dttm','valid_to_dttm','customer_rk','process_dttm','version_no']
-#display(source_df)
-scd.check_columns_presence(source_df, target_df, metadata_cols)
+%run "SCDHandler program"
 
 # METADATA ********************
 
@@ -177,19 +176,25 @@ scd.check_columns_presence(source_df, target_df, metadata_cols)
 
 # CELL ********************
 
-#Create Schema
-from pyspark.sql.types import StructType,StructField, StringType, IntegerType
-emptyRDD = spark.sparkContext.emptyRDD()
-schema = StructType([
-  StructField('id', IntegerType(), True),
-  StructField('middlename', StringType(), True),
-  StructField('lastname', StringType(), True)
-  ])
-df = spark.createDataFrame(emptyRDD,schema)
-#source_df, target_df = scd.apply_hash_and_alias(source_df, target_df, metadata_cols)
-display(df)
-max_surogate_key=target_df.agg(F.ifnull(F.max(surogate_key),lit(1000))).collect()[0][0]
-print('max_surogate_key=',max_surogate_key)
+
+
+param_table_dim="customer"
+param_surogate_key="customer_rk"
+param_business_key="CustomerId"
+
+scd=SCDHandler(with_version=False,surogate_key=param_surogate_key,business_key=param_business_key,processed_date='processed_dttm')
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+
+scd.check_columns_presence(source_df, target_df)
 
 # METADATA ********************
 
@@ -208,7 +213,7 @@ tgt_cols = [x for x in target_df.columns]
 #target_df =target_df.filter((target_df[start_date] <= F.lit(sample_date)) & (target_df[end_date] >= F.lit(sample_date)))
 
 # Apply hash calculation and alias
-source_df, target_df = scd.apply_hash_and_alias(source_df, target_df, metadata_cols)
+source_df, target_df = scd.apply_hash_and_alias(source_df, target_df)
 max_surogate_key=target_df.agg(F.ifnull(F.max(surogate_key),lit(1000))).collect()[0][0]
 print('max_surogate_key=',max_surogate_key)
 # Identify new records
@@ -273,6 +278,26 @@ result_df = unchanged_df.select(tgt_cols). \
 result_df=result_df.drop('hash_value').orderBy(business_key+[start_date])
 display(result_df)
 
+
+# METADATA ********************
+
+# META {
+# META   "language": "python",
+# META   "language_group": "synapse_pyspark"
+# META }
+
+# CELL ********************
+
+from datetime import datetime
+sample_date='20250501'
+# Convert string to date object
+print("date=",datetime.strptime(sample_date, "%Y%m%d").date().strftime("%Y-%m-%d"))
+
+# Convert to string
+#date_string = now.strftime("%Y-%m-%d %H:%M:%S")
+#updated_df = base_df.filter(f"{delta_filter_expr} AND "
+#                            f"source_df.hash_value != target_df.hash_value AND (target_df.{start_date} <= to_date('{sample_date}', {'yyyyMMdd'}) AND target_df.{end_date} >= to_date('{sample_date}', {'yyyyMMdd'}))")
+#display(updated_df)
 
 # METADATA ********************
 

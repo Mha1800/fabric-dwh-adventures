@@ -1,0 +1,219 @@
+{
+  "properties": {
+    "activities": [
+      {
+        "type": "Copy",
+        "typeProperties": {
+          "source": {
+            "type": "DelimitedTextSource",
+            "formatSettings": {
+              "type": "DelimitedTextReadSettings"
+            },
+            "storeSettings": {
+              "type": "LakehouseReadSettings",
+              "recursive": true,
+              "enablePartitionDiscovery": false
+            },
+            "datasetSettings": {
+              "type": "DelimitedText",
+              "typeProperties": {
+                "location": {
+                  "type": "LakehouseLocation",
+                  "folderPath": {
+                    "value": "@concat('Adventures_sample/AdventureWorks_',pipeline().parameters.sample_date)",
+                    "type": "Expression"
+                  },
+                  "fileName": {
+                    "value": "@concat('AdventureWorks_Territories_',pipeline().parameters.sample_date,'.csv')",
+                    "type": "Expression"
+                  }
+                },
+                "columnDelimiter": ",",
+                "quoteChar": "\"",
+                "escapeChar": "\\",
+                "firstRowAsHeader": true
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaLakehouse2",
+                "properties": {
+                  "type": "Lakehouse",
+                  "typeProperties": {
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
+                    "rootFolder": "Files"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "sink": {
+            "type": "DataWarehouseSink",
+            "allowCopyCommand": true,
+            "copyCommandSettings": {},
+            "disableMetricsCollection": false,
+            "datasetSettings": {
+              "type": "DataWarehouseTable",
+              "typeProperties": {
+                "schema": "ods",
+                "table": "territory"
+              },
+              "schema": [],
+              "linkedService": {
+                "name": "MhaWarehouse2",
+                "properties": {
+                  "type": "DataWarehouse",
+                  "typeProperties": {
+                    "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+                    "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+                  },
+                  "annotations": []
+                }
+              },
+              "annotations": []
+            }
+          },
+          "translator": {
+            "type": "TabularTranslator",
+            "typeConversion": true,
+            "typeConversionSettings": {
+              "allowDataTruncation": true,
+              "treatBooleanAsNumber": false
+            }
+          },
+          "enableStaging": true
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Copy data - territory - ODS",
+        "dependsOn": [
+          {
+            "activity": "Script - delete records in ods",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "Script",
+        "typeProperties": {
+          "scripts": [
+            {
+              "text": {
+                "value": "truncate table ods.territory;\ntruncate table stg.territory;",
+                "type": "Expression"
+              },
+              "type": "Query"
+            }
+          ],
+          "scriptBlockExecutionTimeout": "02:00:00"
+        },
+        "linkedService": {
+          "name": "MhaWarehouse2",
+          "properties": {
+            "type": "DataWarehouse",
+            "typeProperties": {
+              "artifactId": "e68688dd-190e-4451-9c06-b46d7c5e06ba",
+              "endpoint": "hywuyaxauvqupogac6yriiqgbm-2owlq3ku7foenn2onqkvebcrbq.datawarehouse.fabric.microsoft.com",
+              "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c"
+            },
+            "annotations": []
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Script - delete records in ods",
+        "dependsOn": []
+      },
+      {
+        "type": "RefreshDataflow",
+        "typeProperties": {
+          "dataflowId": "618cee07-65df-968f-4728-b6be045f8e1d",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "notifyOption": "NoNotification",
+          "dataflowType": "DataflowFabric"
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "Dataflow - territory - STG",
+        "dependsOn": [
+          {
+            "activity": "Copy data - territory - ODS",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "TridentNotebook",
+        "typeProperties": {
+          "notebookId": "bce8b163-1cc1-97e6-4129-812801422db5",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "parameters": {
+            "param_table_dim": {
+              "value": "territory",
+              "type": "string"
+            },
+            "param_surogate_key": {
+              "value": "territory_rk",
+              "type": "string"
+            },
+            "param_business_key": {
+              "value": "TerritoryId",
+              "type": "string"
+            },
+            "param_sample_date": {
+              "value": {
+                "value": "@pipeline().parameters.sample_date",
+                "type": "Expression"
+              },
+              "type": "string"
+            }
+          }
+        },
+        "policy": {
+          "timeout": "0.12:00:00",
+          "retry": 0,
+          "retryIntervalInSeconds": 30,
+          "secureInput": false,
+          "secureOutput": false
+        },
+        "name": "SCD2 - territory_dim",
+        "dependsOn": [
+          {
+            "activity": "Dataflow - territory - STG",
+            "dependencyConditions": [
+              "Succeeded"
+            ]
+          }
+        ]
+      }
+    ],
+    "parameters": {
+      "sample_date": {
+        "type": "string",
+        "defaultValue": "20150201"
+      }
+    }
+  }
+}

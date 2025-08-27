@@ -9,12 +9,6 @@
       "queryId": "61aadea9-99a8-408f-b99c-de280d211517",
       "queryName": "ods sales"
     },
-    "ods sales_DataDestination": {
-      "queryId": "689786ef-2dc3-48f6-8f8a-17a02b49b282",
-      "queryName": "ods sales_DataDestination",
-      "isHidden": true,
-      "loadEnabled": false
-    },
     "dwh customer_dim": {
       "queryId": "e2b14b32-97a4-4305-b4f9-c135ad234274",
       "queryName": "dwh customer_dim"
@@ -26,6 +20,12 @@
     "dwh territory_dim": {
       "queryId": "58cd70ae-25ec-4ab1-9fe3-c5ec4d4b941c",
       "queryName": "dwh territory_dim"
+    },
+    "ods sales_DataDestination": {
+      "queryId": "f121c5cf-e2ba-4139-a498-072e0056f407",
+      "queryName": "ods sales_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

@@ -18,7 +18,7 @@
       "queryName": "ods product_category"
     },
     "stg product_DataDestination": {
-      "queryId": "12566e35-f560-42ee-b621-7cd3c3b90215",
+      "queryId": "39a33ca4-3264-4b29-94ad-31917ecbe847",
       "queryName": "stg product_DataDestination",
       "isHidden": true,
       "loadEnabled": false

@@ -108,8 +108,8 @@
       {
         "type": "RefreshDataflow",
         "typeProperties": {
-          "dataflowId": "058b13d9-cfbe-ad35-47a8-c381310b4117",
-          "workspaceId": "00000000-0000-0000-0000-000000000000",
+          "dataflowId": "310b4117-c381-47a8-ad35-cfbe058b13d9",
+          "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
           "notifyOption": "NoNotification",
           "dataflowType": "DataflowFabric"
         },
@@ -121,6 +121,8 @@
           "secureOutput": false
         },
         "name": "Dataflow - product - STG",
+        "state": "Inactive",
+        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Copy data - product_subcategogy - ODS",
