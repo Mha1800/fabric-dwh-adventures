@@ -9,9 +9,11 @@
       "queryId": "68226bbc-6dac-4ca9-917c-099c48383dfc",
       "queryName": "stg sales"
     },
-    "dwh sales": {
-      "queryId": "3344b6b6-4fce-44d3-8df3-1a66dce8d41b",
-      "queryName": "dwh sales"
+    "stg sales_DataDestination": {
+      "queryId": "d433d3bd-cf0c-4d18-9159-97642d183767",
+      "queryName": "stg sales_DataDestination",
+      "isHidden": true,
+      "loadEnabled": false
     }
   },
   "connections": [

@@ -1,0 +1,33 @@
+table product_category
+	lineageTag: 2de37250-2562-4368-b0ac-59583924ccdb
+	sourceLineageTag: [ods].[product_category]
+
+	column ProductCategoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 683ebcd8-52ad-4676-9117-ff52b0f49da3
+		sourceLineageTag: ProductCategoryKey
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 554c0b6d-d31b-490a-933d-804f7eb32ce5
+		sourceLineageTag: CategoryName
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_category = entity
+		mode: directLake
+		source
+			entityName: product_category
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

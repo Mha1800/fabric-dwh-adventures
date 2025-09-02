@@ -1,0 +1,45 @@
+table 'stg product_subcategory'
+	lineageTag: e1ab640f-31bb-4fb2-922d-4d983a19a7c3
+	sourceLineageTag: [stg].[product_subcategory]
+
+	column SubcategoryName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2fbbaa3-dc8c-4e47-9449-09786407b4fd
+		sourceLineageTag: SubcategoryName
+		summarizeBy: none
+		sourceColumn: SubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSubcategoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 0cdfacf4-db2e-498b-9e34-26e19d3f8e47
+		sourceLineageTag: ProductSubcategoryId
+		summarizeBy: count
+		sourceColumn: ProductSubcategoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCategoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4558f073-dce9-4fd5-877d-397cf18ec3eb
+		sourceLineageTag: ProductCategoryId
+		summarizeBy: count
+		sourceColumn: ProductCategoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'stg product_subcategory' = entity
+		mode: directLake
+		source
+			entityName: product_subcategory
+			schemaName: stg
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

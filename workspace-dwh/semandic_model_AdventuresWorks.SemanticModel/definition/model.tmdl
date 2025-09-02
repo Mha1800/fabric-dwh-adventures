@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	collation: Latin1_General_100_BIN2_UTF8
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.147.7761.2 (Main)+4fed62a961b3b674388272b595c56068c5925805
+
+annotation PBI_QueryOrder = ["DatabaseQuery"]
+
+ref table product_category
+ref table product_subcategory
+ref table territory
+ref table sales
+ref table 'stg sales'
+ref table 'dwh sales'
+ref table product
+ref table product_dim
+ref table customer
+ref table customer_dim
+ref table 'stg customer'
+ref table 'stg product_subcategory'
+ref table 'stg product_category'
+ref table 'stg territory'
+ref table 'ods product'
+ref table territory_dim
+
+ref cultureInfo en-US
+

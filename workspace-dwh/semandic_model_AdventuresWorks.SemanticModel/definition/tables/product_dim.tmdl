@@ -1,0 +1,180 @@
+table product_dim
+	lineageTag: f0eb1b83-d881-4472-a362-38f176a90c19
+	sourceLineageTag: [dwh].[product_dim]
+
+	column ProductSKU
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e1294680-f569-49b2-91fb-3d805475f785
+		sourceLineageTag: ProductSKU
+		summarizeBy: none
+		sourceColumn: ProductSKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d38f39cd-c1f7-4d6f-b51a-1b94939f28a8
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 287f1857-b422-4a81-a511-4ed8064b7621
+		sourceLineageTag: ModelName
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductDescription
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 01cc2389-fcef-4cd6-a28b-264711db4b8e
+		sourceLineageTag: ProductDescription
+		summarizeBy: none
+		sourceColumn: ProductDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductColor
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7e861ac3-03ea-4576-8f2f-c2c0fd91916c
+		sourceLineageTag: ProductColor
+		summarizeBy: none
+		sourceColumn: ProductColor
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSize
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: bb8fb421-3770-4b5c-b37a-b9701be34366
+		sourceLineageTag: ProductSize
+		summarizeBy: none
+		sourceColumn: ProductSize
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductStyle
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cd461699-c8e9-45b1-ac3f-f99c0cd13f56
+		sourceLineageTag: ProductStyle
+		summarizeBy: none
+		sourceColumn: ProductStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: ebcaed0e-7544-4a73-a183-83467ad65621
+		sourceLineageTag: ProductId
+		summarizeBy: count
+		sourceColumn: ProductId
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductPrice
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: b1d4cc55-1bfd-4a08-91dc-a1160887677d
+		sourceLineageTag: ProductPrice
+		summarizeBy: sum
+		sourceColumn: ProductPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCost
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 3af9e68a-f9d5-43b0-937c-b82812c4d3af
+		sourceLineageTag: ProductCost
+		summarizeBy: sum
+		sourceColumn: ProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: fc6b27be-80e4-4071-bf04-f5395a97a92d
+		sourceLineageTag: SubcategoryName
+		summarizeBy: none
+		sourceColumn: SubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f309ba08-0510-4ce1-828e-da5fc22c86c6
+		sourceLineageTag: CategoryName
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 480b976d-cd7f-4e5d-99a4-67f08f2cb46e
+		sourceLineageTag: valid_from_dttm
+		summarizeBy: none
+		sourceColumn: valid_from_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 31b1e39b-cf95-4433-901c-c0191d67b064
+		sourceLineageTag: valid_to_dttm
+		summarizeBy: none
+		sourceColumn: valid_to_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column processed_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 65abf69a-830a-4546-a182-0314f04a85a7
+		sourceLineageTag: processed_dttm
+		summarizeBy: none
+		sourceColumn: processed_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 21496998-0635-42bc-bae3-efbfbe12dc58
+		sourceLineageTag: product_rk
+		summarizeBy: sum
+		sourceColumn: product_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_dim = entity
+		mode: directLake
+		source
+			entityName: product_dim
+			schemaName: dwh
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

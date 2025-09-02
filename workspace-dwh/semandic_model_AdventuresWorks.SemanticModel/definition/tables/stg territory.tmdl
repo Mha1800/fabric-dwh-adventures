@@ -1,0 +1,54 @@
+table 'stg territory'
+	lineageTag: f3b884d0-146a-4f4c-9601-120f8e20a39d
+	sourceLineageTag: [stg].[territory]
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: eee216a7-8a8d-4d7d-bdd8-b10e7d6a6d80
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: d6eaadd8-e735-4c50-8682-1a877fed5752
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 90865cd6-4f50-4286-9250-bc2ca7199c54
+		sourceLineageTag: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5db92cb1-8801-4e6e-a3af-e6c6cfac9f7f
+		sourceLineageTag: TerritoryId
+		summarizeBy: count
+		sourceColumn: TerritoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'stg territory' = entity
+		mode: directLake
+		source
+			entityName: territory
+			schemaName: stg
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

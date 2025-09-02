@@ -39,8 +39,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
-                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -94,8 +94,6 @@
           "secureOutput": false
         },
         "name": "Copy data - product - ODS",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Script - delete records in ods",
@@ -108,8 +106,8 @@
       {
         "type": "RefreshDataflow",
         "typeProperties": {
-          "dataflowId": "310b4117-c381-47a8-ad35-cfbe058b13d9",
-          "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+          "dataflowId": "058b13d9-cfbe-ad35-47a8-c381310b4117",
+          "workspaceId": "00000000-0000-0000-0000-000000000000",
           "notifyOption": "NoNotification",
           "dataflowType": "DataflowFabric"
         },
@@ -121,8 +119,6 @@
           "secureOutput": false
         },
         "name": "Dataflow - product - STG",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Copy data - product_subcategogy - ODS",
@@ -210,8 +206,6 @@
           "secureOutput": false
         },
         "name": "Script - delete records in ods",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
       },
       {
@@ -277,8 +271,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
-                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -332,8 +326,6 @@
           "secureOutput": false
         },
         "name": "Copy data - product_categogy - ODS",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Copy data - product - ODS",
@@ -381,8 +373,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
-                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -436,8 +428,6 @@
           "secureOutput": false
         },
         "name": "Copy data - product_subcategogy - ODS",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Copy data - product_categogy - ODS",

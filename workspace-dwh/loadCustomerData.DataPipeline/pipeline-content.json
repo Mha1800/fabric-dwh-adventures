@@ -213,7 +213,8 @@
     ],
     "parameters": {
       "sample_date": {
-        "type": "string"
+        "type": "string",
+        "defaultValue": "20150201"
       }
     }
   }

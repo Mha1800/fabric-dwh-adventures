@@ -39,8 +39,8 @@
                 "properties": {
                   "type": "Lakehouse",
                   "typeProperties": {
-                    "artifactId": "c399e8e0-1f84-4e46-a6c9-25d247e30131",
-                    "workspaceId": "6db8acd3-f954-465c-b74e-6c155204510c",
+                    "artifactId": "47e30131-25d2-a6c9-4e46-1f84c399e8e0",
+                    "workspaceId": "00000000-0000-0000-0000-000000000000",
                     "rootFolder": "Files"
                   },
                   "annotations": []
@@ -94,8 +94,6 @@
           "secureOutput": false
         },
         "name": "Copy data - sales- ODS",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": [
           {
             "activity": "Script - delete records in ods",
@@ -139,8 +137,6 @@
           "secureOutput": false
         },
         "name": "Script - delete records in ods",
-        "state": "Inactive",
-        "onInactiveMarkAs": "Succeeded",
         "dependsOn": []
       },
       {

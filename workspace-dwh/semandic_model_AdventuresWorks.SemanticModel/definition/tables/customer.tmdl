@@ -1,0 +1,143 @@
+table customer
+	lineageTag: 3bad6ab8-4963-474b-b169-a1dd7ae3855e
+	sourceLineageTag: [ods].[customer]
+
+	column CustomerKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 848c490d-1eed-49b8-9b08-0cd37b670e87
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prefix
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 972e8d62-c7f7-4e2f-b15a-be746e66d3ba
+		sourceLineageTag: Prefix
+		summarizeBy: none
+		sourceColumn: Prefix
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4713f284-c0f8-45c2-ab7e-4d91dd8fccb5
+		sourceLineageTag: FirstName
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e25f7c10-3f25-4bf8-ad66-5d8ec14d9398
+		sourceLineageTag: LastName
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	column BirthDate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 2904770a-24e5-49b0-8e59-c2ea3fd1d60a
+		sourceLineageTag: BirthDate
+		summarizeBy: none
+		sourceColumn: BirthDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column MaritalStatus
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2a796fa-6f2a-4ac7-a10a-fc0a0c833ef2
+		sourceLineageTag: MaritalStatus
+		summarizeBy: none
+		sourceColumn: MaritalStatus
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cb5594f3-5380-4ffb-bc8e-a311d13a917f
+		sourceLineageTag: Gender
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmailAddress
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: db3b0f1b-ba1d-4f0b-bc07-234e59b8b3ec
+		sourceLineageTag: EmailAddress
+		summarizeBy: none
+		sourceColumn: EmailAddress
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnnualIncome
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 037a84c6-c4ed-4238-a112-99b93473f726
+		sourceLineageTag: AnnualIncome
+		summarizeBy: none
+		sourceColumn: AnnualIncome
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalChildren
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c427f040-b716-45a0-9d16-dee077d9e754
+		sourceLineageTag: TotalChildren
+		summarizeBy: none
+		sourceColumn: TotalChildren
+
+		annotation SummarizationSetBy = Automatic
+
+	column EducationLevel
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 53832305-8edf-4c20-9fc6-7f74adaacf8d
+		sourceLineageTag: EducationLevel
+		summarizeBy: none
+		sourceColumn: EducationLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column Occupation
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 870de30d-a227-4e2c-95c4-949f162e4bb9
+		sourceLineageTag: Occupation
+		summarizeBy: none
+		sourceColumn: Occupation
+
+		annotation SummarizationSetBy = Automatic
+
+	column HomeOwner
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3694bafa-e9bb-43cc-bccf-2093cab8be14
+		sourceLineageTag: HomeOwner
+		summarizeBy: none
+		sourceColumn: HomeOwner
+
+		annotation SummarizationSetBy = Automatic
+
+	partition customer = entity
+		mode: directLake
+		source
+			entityName: customer
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

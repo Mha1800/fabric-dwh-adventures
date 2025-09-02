@@ -1,0 +1,98 @@
+table territory_dim
+	lineageTag: e8cacb8d-c784-4d4d-bcb1-3d355f1d6ad1
+	sourceLineageTag: [dwh].[territory_dim]
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 3615e8b3-36fe-4657-8d11-06380ef4f302
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: eff6a18c-049e-41b7-a8ba-15c76abf8162
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: a16a074d-05bd-46d1-b017-9c03c7a04775
+		sourceLineageTag: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 2ba448cc-a5b9-4749-8fa9-999ce9a94d86
+		sourceLineageTag: TerritoryId
+		summarizeBy: count
+		sourceColumn: TerritoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_from_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 0ff05df2-1a40-4672-89a3-e38f2de46af3
+		sourceLineageTag: valid_from_dttm
+		summarizeBy: none
+		sourceColumn: valid_from_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column valid_to_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 9fef948d-7da4-480a-92f8-ccb4d0fe132a
+		sourceLineageTag: valid_to_dttm
+		summarizeBy: none
+		sourceColumn: valid_to_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column processed_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: b11f773f-f440-445f-acee-bdf46485b063
+		sourceLineageTag: processed_dttm
+		summarizeBy: none
+		sourceColumn: processed_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	column territory_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 590bc417-2027-439f-b1ee-1c820aab6a14
+		sourceLineageTag: territory_rk
+		summarizeBy: sum
+		sourceColumn: territory_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	partition territory_dim = entity
+		mode: directLake
+		source
+			entityName: territory_dim
+			schemaName: dwh
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

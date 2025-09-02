@@ -1,0 +1,123 @@
+table 'ods product'
+	lineageTag: e801e032-c51d-477e-91cc-85b09d6c7d6e
+	sourceLineageTag: [ods].[product]
+
+	column ProductKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 178135d7-c08e-4c9b-9bd0-454c08f21cb9
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSubcategoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 20c3684b-cacb-4653-9d2a-cd1e5464415c
+		sourceLineageTag: ProductSubcategoryKey
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSKU
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 806c4270-bb7a-423f-baf8-d50b57c638ff
+		sourceLineageTag: ProductSKU
+		summarizeBy: none
+		sourceColumn: ProductSKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 61098160-55aa-41bb-8b7d-b564752492cd
+		sourceLineageTag: ProductName
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ModelName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c2b590fe-a340-4a2c-af50-b4b607b9921d
+		sourceLineageTag: ModelName
+		summarizeBy: none
+		sourceColumn: ModelName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductDescription
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7d9fd978-a94a-4411-bdd2-7f5d381f17ba
+		sourceLineageTag: ProductDescription
+		summarizeBy: none
+		sourceColumn: ProductDescription
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductColor
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 672b6081-9973-4ead-a128-e8d7253474f5
+		sourceLineageTag: ProductColor
+		summarizeBy: none
+		sourceColumn: ProductColor
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductSize
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 90d3c2fe-e516-4c60-8e75-e1a7c1726a40
+		sourceLineageTag: ProductSize
+		summarizeBy: none
+		sourceColumn: ProductSize
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductStyle
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 30875b27-b14e-47ce-bd92-887e2d3ab6a5
+		sourceLineageTag: ProductStyle
+		summarizeBy: none
+		sourceColumn: ProductStyle
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCost
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 836493c6-ffaf-4a53-8efe-fad7d813ce20
+		sourceLineageTag: ProductCost
+		summarizeBy: none
+		sourceColumn: ProductCost
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductPrice
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6ace000d-99ab-476c-affb-c2df7967325b
+		sourceLineageTag: ProductPrice
+		summarizeBy: none
+		sourceColumn: ProductPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'ods product' = entity
+		mode: directLake
+		source
+			entityName: product
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

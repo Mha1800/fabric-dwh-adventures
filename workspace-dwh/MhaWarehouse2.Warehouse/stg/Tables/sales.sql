@@ -8,7 +8,7 @@ CREATE TABLE [stg].[sales] (
 	[CustomerId] int NULL, 
 	[TerritoryId] int NULL, 
 	[StockDate] date NULL, 
-	[OrderNumber] varchar(1) NULL, 
+	[OrderNumber] varchar(8000) NULL, 
 	[OrderLineItem] decimal(18,0) NULL, 
 	[OrderQuantity] decimal(18,0) NULL
 );

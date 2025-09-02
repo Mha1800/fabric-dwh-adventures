@@ -1,0 +1,43 @@
+table product_subcategory
+	lineageTag: 3d10c7e6-8030-4e80-897c-b710b3148345
+	sourceLineageTag: [ods].[product_subcategory]
+
+	column ProductSubcategoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: c4ef1d3d-3327-475d-b32b-a06283f9d5bf
+		sourceLineageTag: ProductSubcategoryKey
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubcategoryName
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 61055777-0586-4ce2-b764-dc2f6ea1ca9f
+		sourceLineageTag: SubcategoryName
+		summarizeBy: none
+		sourceColumn: SubcategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductCategoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e24d94a1-281b-4562-a1ed-9e8a3f316876
+		sourceLineageTag: ProductCategoryKey
+		summarizeBy: none
+		sourceColumn: ProductCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_subcategory = entity
+		mode: directLake
+		source
+			entityName: product_subcategory
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

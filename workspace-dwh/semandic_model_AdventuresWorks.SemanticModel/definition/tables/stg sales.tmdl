@@ -1,0 +1,133 @@
+table 'stg sales'
+	lineageTag: c24929d3-ed17-49ec-9817-233d6a8ce0f1
+	sourceLineageTag: [stg].[sales]
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: 64cab07c-d658-44d6-8119-f9bfe72937ab
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 42570c9e-5510-4f77-b2a6-0ee9e0fbcfa8
+		sourceLineageTag: product_rk
+		summarizeBy: sum
+		sourceColumn: product_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: cd7e0c60-9d87-4117-b746-7c3526ef788d
+		sourceLineageTag: customer_rk
+		summarizeBy: sum
+		sourceColumn: customer_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column territory_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 91bc60f8-04b9-42ae-9b8f-af26a43f77d7
+		sourceLineageTag: territory_rk
+		summarizeBy: sum
+		sourceColumn: territory_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 3ec4e13f-1dd8-4a64-8aec-1b732eebc38d
+		sourceLineageTag: ProductId
+		summarizeBy: count
+		sourceColumn: ProductId
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: b12ef614-c346-4c45-b493-21a70b78f362
+		sourceLineageTag: CustomerId
+		summarizeBy: count
+		sourceColumn: CustomerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 4fd09627-3d7d-46a5-a543-6c073d505442
+		sourceLineageTag: TerritoryId
+		summarizeBy: count
+		sourceColumn: TerritoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: a6203900-4b79-49c2-b2ef-75f01723edc4
+		sourceLineageTag: StockDate
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderNumber
+		dataType: string
+		sourceProviderType: varchar(1)
+		lineageTag: d5d64cc5-a509-4718-9b6c-c596544f82be
+		sourceLineageTag: OrderNumber
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 1289d0ac-50b9-4dfa-a8f1-8c6054be65b5
+		sourceLineageTag: OrderLineItem
+		summarizeBy: sum
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 919015bd-1b5c-498f-9fe7-8a540c87962f
+		sourceLineageTag: OrderQuantity
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'stg sales' = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: stg
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

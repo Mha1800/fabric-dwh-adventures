@@ -1,0 +1,93 @@
+table sales
+	lineageTag: 7bf1f5ed-2541-4e9b-96c5-fa9b781d9b04
+	sourceLineageTag: [ods].[sales]
+
+	column OrderDate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 69971960-b54a-45ef-9a5b-3626db9d7dca
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockDate
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: e80096e2-0724-49d2-989f-fe84df133438
+		sourceLineageTag: StockDate
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderNumber
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 5bca98e5-cd77-43fb-85fb-8c5f74386512
+		sourceLineageTag: OrderNumber
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 299f3169-89d4-424c-8450-799c105e6e9f
+		sourceLineageTag: ProductKey
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 7ee04643-5fd3-43af-8960-3196a3c7dc7c
+		sourceLineageTag: CustomerKey
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: f2dfa7f7-4eaa-432d-b6fb-0ccdfb392bed
+		sourceLineageTag: TerritoryKey
+		summarizeBy: none
+		sourceColumn: TerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: cf5c6b9a-8cbd-4585-b8da-b9ab5a6c5926
+		sourceLineageTag: OrderLineItem
+		summarizeBy: none
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 63e0d746-6e31-4a79-ba83-3aba495656b6
+		sourceLineageTag: OrderQuantity
+		summarizeBy: none
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

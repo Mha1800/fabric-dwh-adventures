@@ -1,0 +1,53 @@
+table territory
+	lineageTag: 25e9075e-a848-42a8-8f1c-164cfa02e150
+	sourceLineageTag: [ods].[territory]
+
+	column SalesTerritoryKey
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 4c32b74c-521c-4251-b153-bbf05d8747c9
+		sourceLineageTag: SalesTerritoryKey
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 398fa614-9828-4feb-bf9e-5ece3af71321
+		sourceLineageTag: Region
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: 6729f4ef-ede7-4b8f-8107-91c06628512d
+		sourceLineageTag: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		sourceProviderType: varchar(8000)
+		lineageTag: ed7779d1-ea31-4402-890a-0030a3aad9c1
+		sourceLineageTag: Continent
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	partition territory = entity
+		mode: directLake
+		source
+			entityName: territory
+			schemaName: ods
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,144 @@
+table 'dwh sales'
+	lineageTag: 27b4c49f-bcf5-424d-bc93-82db56b599b4
+	sourceLineageTag: [dwh].[sales]
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: ec2521bc-5e3c-474c-b58d-72c00c02178e
+		sourceLineageTag: OrderDate
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: fe75e781-bc8d-4df2-b70b-4fe19be785ed
+		sourceLineageTag: product_rk
+		summarizeBy: sum
+		sourceColumn: product_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column customer_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 74ee0b30-869a-4caa-9890-f002c067af39
+		sourceLineageTag: customer_rk
+		summarizeBy: sum
+		sourceColumn: customer_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column territory_rk
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 5c80a0dc-a82b-42ea-bb8c-69b4694adde4
+		sourceLineageTag: territory_rk
+		summarizeBy: sum
+		sourceColumn: territory_rk
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 6406884c-fdd9-4edd-8515-ef0dbdc9d55e
+		sourceLineageTag: ProductId
+		summarizeBy: count
+		sourceColumn: ProductId
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 169a4ea6-e3b6-4490-ada4-c0bd58c56420
+		sourceLineageTag: CustomerId
+		summarizeBy: count
+		sourceColumn: CustomerId
+
+		annotation SummarizationSetBy = Automatic
+
+	column TerritoryId
+		dataType: int64
+		formatString: 0
+		sourceProviderType: int
+		lineageTag: 22ef20d9-7285-48d4-bfe6-a5153ca9dc2c
+		sourceLineageTag: TerritoryId
+		summarizeBy: count
+		sourceColumn: TerritoryId
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockDate
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: date
+		lineageTag: eaf40e95-2af5-4f15-b1bb-3d8710e81d14
+		sourceLineageTag: StockDate
+		summarizeBy: none
+		sourceColumn: StockDate
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderNumber
+		dataType: string
+		sourceProviderType: varchar(1)
+		lineageTag: ccfd7a81-7173-4952-a5a2-a698c0baae59
+		sourceLineageTag: OrderNumber
+		summarizeBy: none
+		sourceColumn: OrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineItem
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 6371ee79-7b32-4bf2-8d32-cd6af7dc03cc
+		sourceLineageTag: OrderLineItem
+		summarizeBy: sum
+		sourceColumn: OrderLineItem
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderQuantity
+		dataType: int64
+		formatString: 0
+		sourceProviderType: decimal(18, 0)
+		lineageTag: 7e219b15-3cbc-4870-87d7-08e8c461e8a8
+		sourceLineageTag: OrderQuantity
+		summarizeBy: sum
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column processed_dttm
+		dataType: dateTime
+		formatString: General Date
+		sourceProviderType: datetime2
+		lineageTag: 2a8b04c9-552e-4a44-88eb-1b2ccad85cd6
+		sourceLineageTag: processed_dttm
+		summarizeBy: none
+		sourceColumn: processed_dttm
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dwh sales' = entity
+		mode: directLake
+		source
+			entityName: sales
+			schemaName: dwh
+			expressionSource: DatabaseQuery
+
+	annotation PBI_ResultType = Table
+
